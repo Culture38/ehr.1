@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EHR.one</title>
+
+   
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    
+    <script src="js/bundle.js"></script>
+
+
+   
+    <style>
+        body {
+        background-image: url("css/image.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      
+.btn:hover {
+    background-image: url("css/image.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.panel{
+        margin-bottom: 60px;
+        background-color: #ffefcb; 
+        border-radius: 38px;
+    }
+    .panel-heading{
+        margin-bottom: 20px;
+        border-radius: 38px 38px 0 0;
+        border: 1px solid transparent;
+    }
+    .navbar{
+        margin-bottom: 70px;
+    }
+    .btn{
+        border-radius: 38px;
+    }
+    .panel-default{
+        border-radius:38px;
+    }
+    
+    </style>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">EHR.one</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="./index.html">Sign In</a>
+                    </li>
+                    <li>
+                        <a href="./register.html">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+  
+    
+
+    
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="text-center">EHR.one</h3></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="alert alert-warning col-sm-8 col-sm-offset-2" style="display: none;">
+                        <strong>Warning!</strong> Unregistered user. Click <a href="./register.html">here</a> to register. 
+                
+                    </div>
+                </div>
+                
+                <form class="form-horizontal" name="loginForm">
+                    <div class="panel-heading"><h5 class="text-center">Sign In is connected to your Metamask account</h5></div>
+                    <div class="form-group">
+                    </div>
+                </form>
+                <div class="text-center">
+                    <button class="btn btn-primary btn-lg" onclick="login()">Sign In</button>
+                </div>
+
+            </div>
+            
+        </div>
+        
+     
+    </div>
+
+
+    
+    <script src="js/jquery.js"></script>
+
+   
+    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/web3.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    
+        connect();    
+        function login(){
+            $(".alert-warning").hide();
+
+            publicKey= web3.currentProvider.selectedAddress;
+            console.log(publicKey);
+            contractInstance.get_patient_list(function(error, result){
+                if(!error){
+                    var PatientList = result;
+                    for(var i = 0; i < PatientList.length; i++) {
+                        if (publicKey.toLowerCase() == PatientList[i]) {
+                            location.href = "./patient.html?key=" + publicKey;
+                        }
+                    }
+                    
+                } else {
+                    console.log(error);
+                    console.log("Invalid User!");
+                    $(".alert-warning").show();
+                }
+            });
+
+            contractInstance.get_doctor_list(function(error, result){
+                if(!error){
+                    var DoctorList = result;
+                    for(var i = 0; i < DoctorList.length; i++) {
+                        if (publicKey.toLowerCase() == DoctorList[i]) {
+                            location.href = "./doctor.html?key=" + publicKey;
+                        }
+                    }
+                    
+                } else {
+                    console.log(error);
+                    $(".alert-warning").show();
+                }
+            }); 
+            
+            console.log("Invalid User!");
+            $(".alert-warning").show();
+        }
+
+     
+        
+    </script>
+ 
+    
+
+</body>
+
+</html>

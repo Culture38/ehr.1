@@ -1,0 +1,28 @@
+{
+  "name": "ehr.1",
+  "version": "1.0.0",
+  "description": "Dapp for health data sharing",
+  "main": "truffle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server",
+    "ehr.1": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Culture38/ehr.1.git"
+  },
+  "author": "Culture",
+  "license": "ISC",
+  "dependencies": {
+    "solc": "^0.4.24",
+    "web3": "^0.20.0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Culture38/ehr.1/issues"
+  },
+  "homepage": "https://github.com/Culture38/ehr.1#readme"
+}
